@@ -12,7 +12,7 @@ export const CreateToken = (user = null) => {
     username: user.username,
   };
   return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "7d",
+    expiresIn: "24h",
   });
 };
 
@@ -108,7 +108,7 @@ const LoginUser = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV  === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000,
     }).status(200).json({
       message: "Login successful",
       success: true,

@@ -30,9 +30,9 @@ const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
 
   // Logout Function
   const handleLogout = () => {
-    sessionStorage.removeItem("loginTime"); // Clear login time
+    sessionStorage.removeItem("loginTime");
     alert("Logged out successfully!");
-    window.location.reload(); // Refresh page (simulating logout)
+    window.location.reload(); 
   };
 
   return (
@@ -56,12 +56,12 @@ const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
         className="fw-bold text-white"
         style={{
           marginLeft: "60px",
-          whiteSpace: "nowrap", // Prevent text wrapping
+          whiteSpace: "nowrap", 
           overflow: "hidden",
           textOverflow: "ellipsis",
         }}
       >
-        👤 {props.name}
+      {props.name}
       </Navbar.Brand>
       <Nav className="ms-auto d-flex align-items-center">
         <span className="text-white me-3">⏳ Logged in: {loginDuration}</span>

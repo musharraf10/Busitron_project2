@@ -1,0 +1,34 @@
+.active-link {
+    background-color: #343a40;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .active-link:hover {
+    background-color: #3b4047 !important;
+  }
+  
+  .nav-link {
+    transition: background-color 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: #2b2f34;
+    border-radius: 4px;
+  }
+  
+  .btn-custom {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-custom:hover {
+    background-color: #0056b3;
+  }
+  
+  .navbar {
+    color: #ffffff !important;
+  }
+  
