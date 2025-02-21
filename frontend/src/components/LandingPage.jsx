@@ -247,16 +247,7 @@ const LandingPage = () => {
 
   return (
     <div>
-       <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            EduPlatform
-          </Typography>
-          <Button color="inherit" onClick={handleLoginOpen}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
+       
 
       {/* Modal for Login Form */}
       <Modal open={openLoginModal} onClose={handleLoginClose}>

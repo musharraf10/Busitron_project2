@@ -1,0 +1,59 @@
+body {
+    padding-top: 60px; /* Adjusted for fixed navbar */
+}
+/* Add space between navbar items */
+.navbar-nav .nav-item {
+    margin-right: 20px; /* Space between Home, About, Contact links */
+}
+
+/* Add space between the links and Login button */
+.navbar-nav .nav-item:last-child {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+/* Style for navbar links */
+.navbar-nav .nav-link {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect on nav links */
+.navbar-nav .nav-link:hover {
+    color:  rgba(255, 193, 7, 1); /* Orange color on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Style for Login button */
+.navbar-nav .btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 30px; /* Rounded button */
+}
+
+/* Hover effect on Login button */
+.navbar-nav .btn:hover {
+    background-color:  rgba(255, 193, 7, 1); /* Change background color on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+    color: white; /* Change text color */
+}
+
+/* Active link style */
+.navbar-nav .nav-link.active {
+    color: rgba(255, 193, 7, 1); /* Active link color */
+    font-weight: bold; /* Make active link bold */
+}
+
+/* Add separate background color to Company Name */
+.navbar-brand {
+    background-color: #23272b; /* You can change this color to your preference */
+    color: white; /* White text color */
+    padding: 10px 15px; /* Add padding for better spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for Company Name */
+.navbar-brand:hover {
+    background-color:  rgb(240, 181, 4); /* Darker blue on hover */
+    color: white; /* Ensure text remains white on hover */
+}
+

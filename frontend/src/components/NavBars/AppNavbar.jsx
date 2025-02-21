@@ -36,14 +36,14 @@ const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" className="px-3">
+    <Navbar bg="dark" variant="dark" className="px-3 position-sticky top-0" style={{zIndex:9}}>
       <Button
         variant="outline-light"
         className="position-absolute"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         style={{
           top: "12px",
-          left: isSidebarOpen ? "220px" : "20px",
+          left: isSidebarOpen ? "250px" : "20px",
           zIndex: 1050,
           color: "white",
           border: "none",

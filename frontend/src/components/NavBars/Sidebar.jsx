@@ -20,10 +20,9 @@ const Sidebar = ({ props, setSelectedComponent }) => {
   return (
     <div
       className="bg-dark text-white p-3 vh-100 position-fixed top-0 start-0 d-flex flex-column"
-      style={{ width: "250px", borderRight: "1px solid rgba(255, 255, 255, 0.1)" }}
+      style={{ width: "250px", borderRight: "1px solid rgba(255, 255, 255, 0.1)", zIndex:15 }}
     >
-      {/* Profile Section */}
-      <div className="d-flex align-items-center mb-4">
+      <div className="d-flex align-items-center mb-4" >
         <img
           src={props.profileImage || `https://picsum.photos/100?random=${Math.floor(Math.random() * 1000)}`}
           alt="Profile"
@@ -32,7 +31,7 @@ const Sidebar = ({ props, setSelectedComponent }) => {
         />
         <div>
           <h5 className="mb-0">{props.name}</h5>
-          <small className="text-muted">{props.role}</small>
+          <small>{props.role}</small>
         </div>
       </div>
 

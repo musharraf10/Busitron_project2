@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/NavBars/Sidebar";
 import Dashboard from "./Dashboard";
-import UsersManagement from "./UsersManagement"; // Import the UsersManagement Component
-import AppNavbar from "./AppNavbar";
-import Profile from "../components/Profile";
+import UsersManagement from "./UsersManagement";
+import AppNavbar from "../components/NavBars/AppNavbar";
 import ContentModeration from "./ContentModeration";
+import Settings from "../components/Settings";
 
 function Home({ props }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [selectedComponent, setSelectedComponent] = useState("dashboard"); // Default page
+  const [selectedComponent, setSelectedComponent] = useState("dashboard"); 
 
   return (
     <div>
@@ -29,7 +29,7 @@ function Home({ props }) {
           {selectedComponent === "dashboard" && <Dashboard props={props} />}
           {selectedComponent === "users" && <UsersManagement />}
           {selectedComponent === "settings" && (
-            <Profile
+            <Settings
               props={props}
               setSelectedComponent={setSelectedComponent}
             />

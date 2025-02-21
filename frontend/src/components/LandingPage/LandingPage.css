@@ -1,0 +1,167 @@
+/* Prevent Horizontal Scrolling */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Hides unwanted horizontal scroll */
+}
+
+/* Ensure images fit within their containers */
+.article-card img {
+  width: 100%;
+  /* Full width */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Prevent horizontal scrolling */
+body,
+html {
+  overflow-x: hidden;
+  display: contents;
+}
+
+@media (max-width: 768px) {
+  .article-card img {
+    display: none;
+    /* Hide images on small screens */
+  }
+}
+
+/* Hero Section Styling */
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  background-image: url("https://img.freepik.com/free-photo/multi-ethnic-group-young-men-women-studying-indoors_1139-989.jpg?t=st=1739947000~exp=1739950600~hmac=408527ddb81c639e84db8dabd5ee06b3172c34b7277b8031f1f3bb46af2f4887&w=996");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  /* Prevents overflow */
+  margin-top: 0;
+  /* Remove negative margin */
+}
+
+/* Dark Overlay with Blur Effect */
+.hero-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  width: 80%;
+}
+
+/* Responsive Fix for Smaller Screens */
+@media (max-width: 768px) {
+  .hero-content {
+    width: 95%;
+  }
+}
+
+/* Buttons */
+.btn {
+  font-size: 14px;
+  padding: 5px 12px;
+}
+
+/* Articles Row - All items in a single row with scrolling if needed */
+.articles-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 15px;
+  overflow-x: auto;
+  /* Allows horizontal scrolling on smaller screens */
+  padding-bottom: 10px;
+  scrollbar-width: none;
+  /* Hides scrollbar in Firefox */
+}
+
+.articles-row::-webkit-scrollbar {
+  display: none;
+  /* Hides scrollbar in Webkit browsers */
+}
+
+/* Styling for individual article cards */
+.article-card {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  /* Ensures cards are in a row */
+  flex-shrink: 0;
+}
+
+.slick-slider {
+  overflow: hidden;
+  /* Hides extra parts of the slider */
+}
+
+
+/* Custom Arrows */
+.slick-prev,
+.slick-next {
+  font-size: 24px;
+  color: #000;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Adjust Arrow Positions */
+.slick-prev {
+  left: 10px;
+  /* Adjusted to prevent overflow */
+}
+
+.slick-next {
+  right: 10px;
+  /* Adjusted to prevent overflow */
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #000;
+}
+
+/* Fix for Mobile Screens */
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    padding: 50px 20px;
+  }
+
+  .slick-prev {
+    left: 5px;
+  }
+
+  .slick-next {
+    right: 5px;
+  }
+}
+
+.article-card{
+  height:390px;
+}
