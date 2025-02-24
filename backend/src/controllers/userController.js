@@ -12,7 +12,7 @@ export const CreateToken = (user = null) => {
     username: user.username,
   };
   return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "24h",
+    expiresIn: "7d",
   });
 };
 
@@ -108,7 +108,7 @@ const LoginUser = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV  === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     }).status(200).json({
       message: "Login successful",
       success: true,
@@ -279,15 +279,12 @@ const passwordRestOtp = async (req, res) => {
       });
     }
 
-    // Generate a 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Store OTP with expiration time (2 minutes)
     user.restOtp = otp;
-    user.restOtpExpireAt = Date.now() + 24 * 60 * 1000; // 2 minutes expiration
+    user.restOtpExpireAt = Date.now() + 24 * 60 * 1000; 
     await user.save();
 
-    // Email Options
     const mailOption = {
       from: "abhisheksathala296@gmail.com",
       to: user.email,
@@ -295,7 +292,6 @@ const passwordRestOtp = async (req, res) => {
       text: `Your OTP is ${otp}. Reset your password using this OTP. Valid for 2 minutes only.`,
     };
 
-    // Send Email
     try {
       await transporter.sendMail(mailOption);
       res.status(200).json({

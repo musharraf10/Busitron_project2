@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Card, CardContent, Typography, Menu, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, TextField, FormControl, InputLabel, Select } from '@mui/material';
-import { MoreVert, CheckCircle, Flag, PendingActions, Delete, Publish, Analytics } from '@mui/icons-material';
+import { Button, Card, CardContent, Typography, Menu, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Box, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { MoreVert, CheckCircle, Flag, PendingActions, Delete } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { Pie, Bar } from 'react-chartjs-2';
 
@@ -19,22 +19,30 @@ const StatusCard = styled(Card)(({ status }) => ({
 
 const ContentPart = () => {
   const [content, setContent] = useState([
-    { id: 1, userId: '101', userName: 'John Doe', title: 'Sample content 1', description: 'This is a sample content', image: 'https://via.placeholder.com/150', video: 'https://www.w3schools.com/html/movie.mp4', status: 'Pending', flagged: false, views: 100, likes: 10, dislikes: 2, comments: 5 },
-    { id: 2, userId: '102', userName: 'Jane Doe', title: 'Sample content 2', description: 'This is another sample content', image: 'https://via.placeholder.com/150', video: 'https://www.w3schools.com/html/movie.mp4', status: 'Flagged', flagged: true, views: 200, likes: 15, dislikes: 3, comments: 8 },
-    { id: 3, userId: '103', userName: 'Alice', title: 'Inappropriate content', description: 'This content is inappropriate', image: 'https://via.placeholder.com/150', video: 'https://www.w3schools.com/html/movie.mp4', status: 'Active', flagged: false, views: 300, likes: 20, dislikes: 5, comments: 10 },
+    { id: 1, userId: '101', userName: 'John Doe', title: 'Sample content 1', description: 'This is a sample content', image: `https://picsum.photos/100?random=${Math.floor(Math.random() * 1000)}`, video: 'https://www.w3schools.com/html/movie.mp4', status: 'Pending', flagged: false, views: 100, likes: 10, dislikes: 2, comments: 5 },
+    { id: 2, userId: '102', userName: 'Jane Doe', title: 'Sample content 2', description: 'This is another sample content', image: `https://picsum.photos/100?random=${Math.floor(Math.random() * 1000)}`, video: 'https://www.w3schools.com/html/movie.mp4', status: 'Flagged', flagged: true, views: 200, likes: 15, dislikes: 3, comments: 8 },
+    { id: 3, userId: '103', userName: 'Alice', title: 'Inappropriate content', description: 'This content is inappropriate', image: `https://picsum.photos/100?random=${Math.floor(Math.random() * 1000)}`, video: 'https://www.w3schools.com/html/movie.mp4', status: 'Active', flagged: false, views: 300, likes: 20, dislikes: 5, comments: 10 },
   ]);
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [open, setOpen] = useState(false);
+  const [selectedMedia, setSelectedMedia] = useState({ type: '', url: '' });
 
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
 
+  const handleOpen = (type, url) => {
+    setSelectedMedia({ type, url });
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleStatusChange = (id, status) => {
     setContent(content.map((item) => (item.id === id ? { ...item, status } : item)));
   };
-
-  const handleCategoryChange = (event) => setSelectedCategory(event.target.value);
 
   const chartData = {
     labels: ['Active', 'Pending', 'Flagged', 'Removed'],
@@ -65,7 +73,6 @@ const ContentPart = () => {
 
   return (
     <div className="content-moderation">
-
       <div className="status-cards" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
         {['Active', 'Pending', 'Flagged', 'Removed'].map((status, index) => (
           <StatusCard key={index} status={status}>
@@ -99,7 +106,7 @@ const ContentPart = () => {
           </Box>
         </Box>
       </Box>
-      {/* Content Table */}
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="content table">
           <TableHead>
@@ -125,10 +132,20 @@ const ContentPart = () => {
                 <TableCell>{item.title}</TableCell>
                 <TableCell>{item.description}</TableCell>
                 <TableCell>
-                  <span style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}>View Image</span>
+                  <span 
+                    style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }} 
+                    onClick={() => handleOpen('image', item.image)}
+                  >
+                    View Image
+                  </span>
                 </TableCell>
                 <TableCell>
-                  <span style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}>Play Video</span>
+                  <span 
+                    style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }} 
+                    onClick={() => handleOpen('video', item.video)}
+                  >
+                    Play Video
+                  </span>
                 </TableCell>
                 <TableCell>
                   <IconButton onClick={handleMenuOpen}>
@@ -167,6 +184,25 @@ const ContentPart = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogTitle>{selectedMedia.type === 'image' ? 'Image' : 'Video'}</DialogTitle>
+        <DialogContent>
+          {selectedMedia.type === 'image' ? (
+            <img src={selectedMedia.url} alt="Content" style={{ width: '100%', height: 'auto' }} />
+          ) : (
+            <video controls style={{ width: '100%', height: 'auto' }}>
+              <source src={selectedMedia.url} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

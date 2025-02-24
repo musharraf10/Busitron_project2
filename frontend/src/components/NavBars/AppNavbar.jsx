@@ -65,7 +65,7 @@ const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
       </Navbar.Brand>
       <Nav className="ms-auto d-flex align-items-center">
         <span className="text-white me-3">⏳ Logged in: {loginDuration}</span>
-        <Nav.Link href="/landingpage">
+        <Nav.Link href="/">
           <Button variant="danger" onClick={handleLogout}>
             <FaSignOutAlt /> Logout
           </Button>

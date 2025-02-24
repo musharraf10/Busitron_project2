@@ -1,10 +1,11 @@
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
-import { app } from './../Firebase';
+import { app } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
+import GoogleIcon from '@mui/icons-material/Google';
 
-const Oauth = () => {
+const Oauth = ({isRegister}) => {
   const navigate = useNavigate(); 
 
   const handleGoogleClick = async () => {
@@ -29,7 +30,7 @@ const Oauth = () => {
 
       if (resp.data.success) {
         console.log(resp.data);
-        navigate('/');
+        navigate('/admin');
       }
     } catch (error) {
       console.error(
@@ -41,8 +42,8 @@ const Oauth = () => {
 
   return (
     <>
-      <Button variant="danger" onClick={handleGoogleClick}>
-        Google
+      <Button className='bg-danger' onClick={handleGoogleClick} style={{width:'100%', border:'none' ,alignContent:'center', justifyContent:"center"}}>
+        <GoogleIcon className='text-white '/> {isRegister ? 'Sign up' : 'Login'} with Google
       </Button>
     </>
   );

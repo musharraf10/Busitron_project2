@@ -7,13 +7,14 @@ const UserSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-      email: {
+    email: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
       trim: true,
     },
+
     password: {
       type: String,
       required: function () {
@@ -22,35 +23,14 @@ const UserSchema = new mongoose.Schema(
       minlength: 6,
       select: false,
     },
+    transaction: [{ type: mongoose.Schema.Types.ObjectId, ref: 'transaction' }],
     role: {
       type: String,
       enum: ["subscriber", "content_curator", "admin"],
       default: "subscriber",
     },
-      // phonenumber:{
-      //   type: String,
-      // },
-    subscription: {
-      plan: {
-        type: String,
-        enum: ["free", "monthly", "annual"],
-        default: "free",
-      },
-      plan_status: {
-        type: String,
-        enum: ["active", "expired", "canceled"],
-        default: "active",
-      },
-      start_date: {
-        type: Date,
-      },
-      end_date: {
-        type: Date,
-      },
-    },
-    socialId: {
-      google: String,
-      facebook: String,
+    phonenumber: {
+      type: Number,
     },
     isOAuth: {
       type: Boolean,
@@ -64,28 +44,18 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-      verifyotpexpireat: {
+    verifyotpexpireat: {
       type: Number,
       default: 0,
     },
-      isAccountverified:{
-          type: Boolean,
-          default: false,
-      },
-      restOtp:{
-        type: String,
-          default: "",
 
-      },
-      restOtpExpireAt:{
-        type: Number,
-          default: 0,
-      },
-    resetToken: {
+    restOtp: {
       type: String,
+      default: "",
     },
-    resetTokenExpires: {
-      type: Date,
+    restOtpExpireAt: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }

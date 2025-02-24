@@ -5,6 +5,7 @@ import UsersManagement from "./UsersManagement";
 import AppNavbar from "../components/NavBars/AppNavbar";
 import ContentModeration from "./ContentModeration";
 import Settings from "../components/Settings";
+import SubscriptionCards from "../components/Subscriptions/SubscriptionCards";
 
 function Home({ props }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -33,9 +34,10 @@ function Home({ props }) {
               props={props}
               setSelectedComponent={setSelectedComponent}
             />
-            
           )}
           {selectedComponent === "content" && <ContentModeration props={props} />}
+
+          {selectedComponent === "plans" && <SubscriptionCards/>}
         </div>
       </div>
     </div>

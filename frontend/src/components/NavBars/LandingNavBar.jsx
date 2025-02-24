@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LandingPageNav.css"; 
-import AuthForm from "../AuthForm";
+import AuthForm from "../Auth/AuthForm";
 
 const LandingNavbar = () => {
     const [activeLink, setActiveLink] = useState("home");
@@ -73,7 +73,7 @@ const LandingNavbar = () => {
                 </div>
             </nav>
 
-            <Modal show={showModal} onHide={handleCloseModal} centered>
+            <Modal show={showModal} onHide={handleCloseModal} centered >
                 <AuthForm/>
             </Modal>
         </div>

@@ -5,6 +5,7 @@ import userRoute from "./src/routes/userRoute.js";
 import configureCors from './src/middelware/configureCors.js'
 import {requestLogger, addTimeStamp} from './src/middelware/customMiddleware.js'
 import {globalErrorhandler} from "./src/middelware/errorHandler.js";
+// import passport from './src/config/passportConfig.js'
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(addTimeStamp)
 // Routes
 app.use("/api/v1/user", userRoute);
 
+// app.use(passport.initialize());
 
 // globelerror-handler
 

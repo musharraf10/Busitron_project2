@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
 import { makeStyles } from "@mui/styles";
-import AuthForm from "./AuthForm";
+import AuthForm from "./Auth/AuthForm";
 
 const useStyles = makeStyles({
   appBar: { backgroundColor: "#3f51b5" },

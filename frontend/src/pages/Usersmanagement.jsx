@@ -1,175 +1,127 @@
-import { useState, useEffect } from "react";
-import { Table, Button, Input, Select, Space, Modal, message, Card } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { motion } from "framer-motion";
-import "./Userm.css"; // Import custom CSS for hover effect
-
-const { Option } = Select;
+import React, { useState } from "react";
+import {
+    Card, CardContent, Button, Select, MenuItem, FormControl, InputLabel,
+    Dialog, DialogTitle, DialogContent, DialogActions, TextField, IconButton, Snackbar
+} from "@mui/material";
+import { Edit, Delete } from "@mui/icons-material";
 
 const UserManagement = () => {
-  const [usersData, setUsersData] = useState([]);
-  const [editingUser, setEditingUser] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isSubscriberDetailsVisible, setIsSubscriberDetailsVisible] = useState(false);
-  const [selectedSubscriber, setSelectedSubscriber] = useState(null);
+    const [filterRole, setFilterRole] = useState("All");
+    const [users, setUsers] = useState([
+        { id: 1, name: "Alice Johnson", designation: "Manager", role: "Admin", status: "Active" },
+        { id: 2, name: "Bob Smith", designation: "Editor", role: "Content Curator", status: "Active" },
+        { id: 3, name: "Charlie Davis", designation: "Subscriber", role: "Subscriber", status: "Active", date: "2025-02-18", time: "10:00 AM", endTime: "6:00 PM", notification: "Monthly", ads: "Yes" },
+        { id: 4, name: "David Williams", designation: "Assistant", role: "Content Curator", status: "Active" },
+        { id: 5, name: "Emma Brown", designation: "Support", role: "Admin", status: "Active" },
+        { id: 6, name: "Frank Thomas", designation: "Viewer", role: "Subscriber", status: "Active", date: "2025-03-01", time: "9:30 AM", endTime: "5:30 PM", notification: "Yearly", ads: "No" },
+        { id: 7, name: "Grace White", designation: "Analyst", role: "Content Curator", status: "Active" },
+        { id: 8, name: "Henry Green", designation: "Subscriber", role: "Subscriber", status: "Active", date: "2025-02-25", time: "11:00 AM", endTime: "7:00 PM", notification: "Monthly", ads: "Yes" },
+    ]);
 
-  const generateUserId = (name) => {
-    const randomNumbers = Math.floor(1000 + Math.random() * 9000);
-    return `${name.slice(0, 4).toLowerCase()}${randomNumbers}`;
-  };
+    const [editUser, setEditUser] = useState(null);
+    const [openEdit, setOpenEdit] = useState(false);
+    const [openAlert, setOpenAlert] = useState(false);
 
-  useEffect(() => {
-    const defaultUsers = [
-      { name: "John Doe", email: "john.doe@example.com", role: "Admin", status: "Active" },
-      { name: "Alice Smith", email: "alice.smith@example.com", role: "Editor", status: "Inactive" },
-      { name: "Bob Johnson", email: "bob.johnson@example.com", role: "Subscriber", status: "Active" },
-      { name: "David Wilson", email: "david.wilson@example.com", role: "Admin", status: "Active" },
-      { name: "Eva Turner", email: "eva.turner@example.com", role: "Editor", status: "Inactive" },
-      { name: "Sophia Brown", email: "sophia.brown@example.com", role: "Subscriber", status: "Active" },
-      { name: "Lucas White", email: "lucas.white@example.com", role: "Editor", status: "Active" },
-      { name: "Liam Green", email: "liam.green@example.com", role: "Subscriber", status: "Inactive" },
-    ];
+    const handleDelete = (id) => {
+        setUsers(users.filter(user => user.id !== id));
+    };
 
-    const usersWithIds = defaultUsers.map(user => ({
-      ...user,
-      userId: generateUserId(user.name)
-    }));
+    const handleEditClick = (user) => {
+        setEditUser(user);
+        setOpenEdit(true);
+    };
 
-    setUsersData(usersWithIds);
-  }, []);
+    const handleEditChange = (e) => {
+        setEditUser({ ...editUser, [e.target.name]: e.target.value });
+    };
 
-  const handleEditUser = (record) => {
-    setEditingUser(record);
-    setIsModalVisible(true);
-  };
+    const handleSaveEdit = () => {
+        setUsers(users.map(user => user.id === editUser.id ? editUser : user));
+        setOpenEdit(false);
+        setOpenAlert(true);
+    };
 
-  const handleSaveEdit = () => {
-    setUsersData(usersData.map(user => 
-      user.userId === editingUser.userId ? { ...user, role: editingUser.role } : user
-    ));
-    setIsModalVisible(false);
-    setEditingUser(null);
-    message.success("User role updated successfully");
-  };
+    const handleToggleStatus = (id) => {
+        setUsers(users.map(user => 
+            user.id === id ? { ...user, status: user.status === "Active" ? "Inactive" : "Active" } : user
+        ));
+    };
 
-  const handleDelete = (id) => {
-    setUsersData(usersData.filter(user => user.userId !== id));
-    message.error("User deleted");
-  };
+    const filteredUsers = filterRole === "All" ? users : users.filter(user => user.role === filterRole);
 
-  const handleDeactivate = (id) => {
-    setUsersData(usersData.map(user => 
-      user.userId === id ? { ...user, status: "Inactive" } : user
-    ));
-    message.success("User deactivated successfully");
-  };
+    return (
+        <Card sx={{ p: 3, maxWidth: "100%", mx: "auto", mt: 3, boxShadow: 3 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                <h2 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>User & Content Management</h2>
+                <FormControl size="small" sx={{ minWidth: 150 }}>
+                    <InputLabel  sx={{padding:4,pt:0,mt:-0.8}} >Filter By Role</InputLabel>
+                    <Select value={filterRole} onChange={(e) => setFilterRole(e.target.value)}>
+                        <MenuItem value="All">All</MenuItem>
+                        <MenuItem value="Admin">Admin</MenuItem>
+                        <MenuItem value="Content Curator">Content Curator</MenuItem>
+                        <MenuItem value="Subscriber">Subscriber</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+            <CardContent>
+                <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid #ccc", fontSize: "0.875rem" }}>
+                    <thead>
+                        <tr style={{ backgroundColor: "#f5f5f5", textAlign: "left" }}>
+                            <th style={{ padding: "8px", border: "1px solid #ddd" }}>ID</th>
+                            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Name</th>
+                            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Designation</th>
+                            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Role</th>
+                            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Status</th>
+                            <th style={{ padding: "8px", border: "1px solid #ddd" }}>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredUsers.map((user) => (
+                            <tr key={user.id} style={{ textAlign: "center" }}>
+                                <td style={{ padding: "8px", border: "1px solid #ddd" }}>{user.id}</td>
+                                <td style={{ padding: "8px", border: "1px solid #ddd" }}>{user.name}</td>
+                                <td style={{ padding: "8px", border: "1px solid #ddd" }}>{user.designation}</td>
+                                <td style={{ padding: "8px", border: "1px solid #ddd" }}>{user.role}</td>
+                                <td 
+                                    style={{ 
+                                      padding: "8px", border: "1px solid #ddd", cursor: "pointer", fontWeight: "bold", color: user.status === "Active" ? "green" : "red" }}
+                                    onClick={() => handleToggleStatus(user.id)}
+                                >
+                                    {user.status}
+                                </td>
+                                <td style={{ padding: "8px", border: "1px solid #ddd" }}>
+                                    <IconButton color="primary" onClick={() => handleEditClick(user)}>
+                                        <Edit />
+                                    </IconButton>
+                                    <IconButton color="error" onClick={() => handleDelete(user.id)}>
+                                        <Delete />
+                                    </IconButton>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </CardContent>
 
-  const handleActivate = (id) => {
-    setUsersData(usersData.map(user => 
-      user.userId === id ? { ...user, status: "Active" } : user
-    ));
-    message.success("User activated successfully");
-  };
+            <Dialog open={openEdit} onClose={() => setOpenEdit(false)}>
+                <DialogTitle>Edit User</DialogTitle>
+                <DialogContent>
+                    {editUser && (
+                        <>
+                            <TextField label="Name" name="name" fullWidth margin="dense" value={editUser.name} onChange={handleEditChange} />
+                            <TextField label="Designation" name="designation" fullWidth margin="dense" value={editUser.designation} onChange={handleEditChange} />
+                        </>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setOpenEdit(false)}>Cancel</Button>
+                    <Button variant="contained" color="primary" onClick={handleSaveEdit}>Save</Button>
+                </DialogActions>
+            </Dialog>
 
-  const handleSubscriberDetails = (record) => {
-    if (record.role) {
-      setSelectedSubscriber(record);
-      setIsSubscriberDetailsVisible(true);
-    }
-  };
-
-  const handleCloseDetails = () => {
-    setIsSubscriberDetailsVisible(false);
-  };
-
-  const columns = [
-    { title: "User ID", dataIndex: "userId", key: "userId" },
-    { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Role", dataIndex: "role", key: "role", render: (_, record) => (
-        <span
-          onClick={() => handleSubscriberDetails(record)}
-          className="hover-pointer"
-        >
-          {record.role}
-        </span>
-      )
-    },
-    { title: "Status", dataIndex: "status", key: "status" },
-    { title: "Actions", key: "actions", render: (_, record) => (
-        <Space>
-          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => handleEditUser(record)}>
-            <EditOutlined style={{ color: "blue" }} />
-          </motion.button>
-          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => handleDelete(record.userId)}>
-            <DeleteOutlined style={{ color: "red" }} />
-          </motion.button>
-        </Space>
-      )
-    }
-  ];
-
-  return (
-    <div style={{ padding: "20px" }}>
-      <div className="section" style={{ marginBottom: "30px" }}>
-        <h2>User Oversight</h2>
-        <Table 
-          dataSource={usersData} 
-          columns={columns} 
-          rowKey="userId" 
-          pagination={false} 
-          rowClassName="hover-row" 
-        />
-      </div>
-
-      {/* Modal for Editing User */}
-      <Modal title="Edit User" visible={isModalVisible} onOk={handleSaveEdit} onCancel={() => setIsModalVisible(false)}>
-        <Input placeholder="Name" value={editingUser?.name} onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })} />
-        <Input placeholder="Email" value={editingUser?.email} onChange={(e) => setEditingUser({ ...editingUser, email: e.target.value })} />
-        <Select value={editingUser?.role} onChange={(value) => setEditingUser({ ...editingUser, role: value })}>
-          <Option value="Editor">Editor</Option>
-          <Option value="Subscriber">Subscriber</Option>
-        </Select>
-      </Modal>
-
-      {/* Subscriber Details Card */}
-      <Modal
-        title="Subscriber Details"
-        visible={isSubscriberDetailsVisible}
-        onCancel={handleCloseDetails}
-        footer={null}
-      >
-        {selectedSubscriber && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            style={{ padding: "20px", border: "1px solid #ddd", borderRadius: "10px", backgroundColor: "#f9f9f9" }}
-          >
-            <Card className="subscriber-card">
-  <h3>Username: {selectedSubscriber.name}</h3>
-  <p><strong>Full Name:</strong> {selectedSubscriber.name}</p>
-  <p><strong>UserID:</strong> {selectedSubscriber.userId}</p>
-  <p><strong>Subscribed Date:</strong> 2025-01-01</p>
-  <p><strong>End Date:</strong> 2025-12-31</p>
-  <p><strong>Subscribe Type:</strong> Premium</p>
-  <p><strong>Subscribed for Notifications:</strong> Email, WhatsApp</p>
-  <p><strong>Ads:</strong> Yes</p>
-
-  <Button
-    type={selectedSubscriber.status === "Inactive" ? "primary" : "danger"}
-    onClick={() => selectedSubscriber.status === "Inactive" ? handleActivate(selectedSubscriber.userId) : handleDeactivate(selectedSubscriber.userId)}
-    className="activate-deactivate-button"
-  >
-    {selectedSubscriber.status === "Inactive" ? "Activate" : "Deactivate"}
-  </Button>
-</Card>
-
-          </motion.div>
-        )}
-      </Modal>
-    </div>
-  );
+            <Snackbar open={openAlert} autoHideDuration={3000} onClose={() => setOpenAlert(false)} message="User details updated successfully!" />
+        </Card>
+    );
 };
 
 export default UserManagement;

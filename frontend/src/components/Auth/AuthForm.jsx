@@ -10,14 +10,12 @@ import {
 } from 'react-bootstrap';
 import {
   TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
 } from '@mui/material';
 import Oauth from './Oauth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import ForgotPassword from './ForgotPassword';
 
 function AuthForm({ onClose }) { 
   const naviget = useNavigate();
@@ -91,18 +89,17 @@ function AuthForm({ onClose }) {
     <Container
       fluid
       className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: '90vh' }} // Ensures form centers in modal
+      style={{ padding:'10px', backgroundColor: "transparent" }} 
     >
-      <Card className="p-4" style={{ borderRadius: '20px', maxWidth: '600px' }}>
+      <Card className="p-4" style={{  maxWidth: '600px', border:'none'}}>
         <Card.Body>
           <Row>
             <Col className="text-center">
               <p className="h1 fw-bold mb-3">
                 {isRegister ? 'Sign up' : 'Login'}
               </p>
-              <p className="text-secondary mb-4">
-                {isRegister ? 'Sign up' : 'Login'} with <Oauth />
-              </p>
+              <hr />
+              
               {error && <Alert variant="danger">{error}</Alert>}
 
               <Form onSubmit={onSubmitHandler} style={{ width: '100%' }}>
@@ -133,7 +130,7 @@ function AuthForm({ onClose }) {
                   />
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 ">
                   <TextField
                     label="Password"
                     type="password"
@@ -144,7 +141,21 @@ function AuthForm({ onClose }) {
                     onChange={onChangeHandler}
                     required
                   />
+                  {!isRegister && (
+                  <Button
+                    className='float-left'
+                    style={{}}
+                    variant="link"
+                    onClick={() => {
+                      naviget('/forget-password');
+                    }}
+                  >
+                    Forget Password
+                  </Button>
+                )}
                 </div>
+                
+                
 
                 <Button
                   type="submit"
@@ -155,10 +166,14 @@ function AuthForm({ onClose }) {
                 >
                   {isRegister ? 'Register' : 'Login'}
                 </Button>
+                <Oauth isRegister={isRegister}/>
               </Form>
 
-              <p className="text-center">
-                {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
+             
+               <p className=" m-0">
+                {isRegister
+                  ? 'Already have an account?'
+                  : "Don't have an account?"}{' '}
                 <Button variant="link" onClick={toggleForm}>
                   {isRegister ? 'Login' : 'Sign up'}
                 </Button>

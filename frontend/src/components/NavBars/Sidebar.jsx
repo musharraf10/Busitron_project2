@@ -81,14 +81,16 @@ const Sidebar = ({ props, setSelectedComponent }) => {
       <div className="text-center bg-light text-dark p-3 rounded mb-4">
         <h6 className="mb-2">Get Premium Features!</h6>
         <p className="small text-muted mb-3">Upgrade to enjoy exclusive benefits.</p>
-        <Button variant="primary" className="w-100 btn-custom">
+        <Button variant="primary" className="w-100 btn-custom"
+        onClick={() => handleComponentClick("plans")}
+        >
           Buy Subscription
         </Button>
       </div>
 
       {/* Logout Button */}
       <Nav.Link
-        href="/landingpage"
+        href="/"
         className="text-white mt-auto d-flex align-items-center"
       >
         <FaSignOutAlt className="me-2" /> Logout

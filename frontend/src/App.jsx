@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import ErrorBoundary from './components/ErrorBoundry';
-import AuthForm from './components/AuthForm';
+import AuthForm from './components/Auth/AuthForm';
 import Home from './pages/Home';
 import LandingHome from './components/LandingPage/LandingHome';
+import ForgotPassword from './components/Auth/ForgotPassword';
 // import PaymentManagementPage from './pages/PaymentManagementPage.jsx'
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/login" element={<AuthForm />} />
           <Route path="/admin" element={<Home props={user} />} />
           {/* <PaymentManagementPage/> */}
+          <Route path="/forget-password" element={<ForgotPassword />} /> 
         </Routes>
       </Router>
     </>
