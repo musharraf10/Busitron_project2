@@ -64,6 +64,7 @@ const Sidebar = ({ props, setSelectedComponent }) => {
         <Nav.Link
           href="#"
           className={`text-white my-2 py-2 px-3 d-flex align-items-center`}
+          onClick={() => handleComponentClick("payments")}
         >
           <FaMoneyBillWave className="me-2" /> Payment Management
         </Nav.Link>

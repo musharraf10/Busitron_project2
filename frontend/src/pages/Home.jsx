@@ -6,6 +6,7 @@ import AppNavbar from "../components/NavBars/AppNavbar";
 import ContentModeration from "./ContentModeration";
 import Settings from "../components/Settings";
 import SubscriptionCards from "../components/Subscriptions/SubscriptionCards";
+import PaymentsDashboard from "./Payments/PaymentsDashboard";
 
 function Home({ props }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -36,6 +37,8 @@ function Home({ props }) {
             />
           )}
           {selectedComponent === "content" && <ContentModeration props={props} />}
+
+          {selectedComponent === 'payments' && <PaymentsDashboard/>}
 
           {selectedComponent === "plans" && <SubscriptionCards/>}
         </div>
