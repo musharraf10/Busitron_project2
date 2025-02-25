@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import LandingHome from './components/LandingPage/LandingHome';
 import ForgotPassword from './components/Auth/ForgotPassword';
 // import PaymentManagementPage from './pages/PaymentManagementPage.jsx'
-
+import "./App.css"
 const App = () => {
 
 

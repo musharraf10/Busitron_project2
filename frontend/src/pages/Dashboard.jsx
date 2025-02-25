@@ -13,7 +13,7 @@ import {
 import { Line } from "react-chartjs-2";
 import MyChart from "../components/CanvasHandiler";
 import SubscriptionStats from "../components/SubscriptionStats";
-
+import "./Dashboard.css"
 const Dashboard = ({ props }) => {
   const [stats, setStats] = useState([]);
 
@@ -112,45 +112,43 @@ const Dashboard = ({ props }) => {
 
   return (
     <div>
-      <h2 className="mb-4 text-dark">Welcome, <span className="text-primary">{props.name}</span></h2>
+      <h2 className="mb-4 text-dark text-center fs-1 mt-5 mb-5 ">Welcome, <span className="text-primary">{props.name}</span></h2>
 
       {/* Dashboard Stats */}
-      <div className="d-flex gap-3 flex-wrap align-items-center justify-content-center">
+      <div className="d-flex gap-3 flex-wrap align-items-center justify-content-center justify-content-md-evenly">
         {stats.map((stat, index) => (
           <Card
             key={index}
-            className="p-3 shadow"
+            className="cardsdata p-3 border-0 text-capitalize my-3"
             style={{
               width: "18rem",
-              background: stat.bg,
+              // background: stat.bg,
               borderRadius: "12px",
-              color: stat.color,
+              // color: stat.color,
             }}
           >
             <Card.Body className="d-flex align-items-center justify-content-between">
               <div>
                 <Card.Title>{stat.title}</Card.Title>
-                <Card.Text className="fs-3 fw-bold">{stat.value}</Card.Text>
+                <Card.Text className="fs-3 ">{stat.value}</Card.Text>
               </div>
-              <div className="fs-1">{stat.icon}</div>
+              <div className="fs-2">{stat.icon}</div>
             </Card.Body>
           </Card>
         ))}
       </div>
-        <hr/>
       {/* Recent Transactions */}
-      <Card className="mt-4 shadow">
+      <Card className="border-0 mt-4 ">
         <Card.Body>
           <SubscriptionStats/>
         </Card.Body>
       </Card>
 
       {/* Traffic Chart */}
-      <Card className="mt-4 shadow">
-        <Card.Header className="bg-dark text-white">
-          <h5>Traffic Overview</h5>
-        </Card.Header>
-        <Card.Body>
+          <h5 className="text-center fs-2 mt-3 mb-3 text-primary">Traffic Overview</h5>
+      <Card className="mt-4  border-0">
+        
+        <Card.Body >
           <div style={{ height: "300px", width: "100%" }}>
             {/* <Line data={chartData} options={{ maintainAspectRatio: false }} /> */}
             <MyChart data={chartData} options={{ maintainAspectRatio: false }}/>

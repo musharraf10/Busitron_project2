@@ -49,7 +49,7 @@ const LandingNavbar = () => {
                     >
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
+                    <div className="" id="navbarNav">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
                                 <NavLink
@@ -60,7 +60,7 @@ const LandingNavbar = () => {
                                 </NavLink>
                             </li>
 
-                            <li className="nav-item">
+                            <li className="nav-item text-white">
                                 <button
                                     className="btn btn-light"
                                     onClick={handleLoginClick}

@@ -1,0 +1,20 @@
+.leftsidebar {
+  background-color: white !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important; 
+}
+.adminnameandrole{
+    color: black !important;
+}
+
+.sidebarname {
+  color: black !important;
+}
+
+.active-link {
+  background-color: rgb(244, 244, 244) !important;
+}
+
+
+.nav-link:hover {
+  background-color: rgb(244, 244, 244) !important;
+}

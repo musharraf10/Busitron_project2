@@ -8,6 +8,8 @@ import {
   FaCogs,
 } from "react-icons/fa";
 import "./Sidebar.css"
+import "./Sidebar2.css"
+
 
 const Sidebar = ({ props, setSelectedComponent }) => {
   const [activeComponent, setActiveComponent] = useState("dashboard");
@@ -19,7 +21,7 @@ const Sidebar = ({ props, setSelectedComponent }) => {
 
   return (
     <div
-      className="bg-dark text-white p-3 vh-100 position-fixed top-0 start-0 d-flex flex-column"
+      className="leftsidebar bg-dark text-white p-3 vh-100 position-fixed top-0 start-0 d-flex flex-column"
       style={{ width: "250px", borderRight: "1px solid rgba(255, 255, 255, 0.1)", zIndex:15 }}
     >
       <div className="d-flex align-items-center mb-4" >
@@ -29,17 +31,17 @@ const Sidebar = ({ props, setSelectedComponent }) => {
           className="rounded-circle me-3"
           style={{ width: "50px", height: "50px", objectFit: "cover" }}
         />
-        <div>
+        <div className="adminnameandrole">
           <h5 className="mb-0">{props.name}</h5>
           <small>{props.role}</small>
         </div>
       </div>
 
       {/* Navigation Links */}
-      <Nav className="flex-column flex-grow-1">
+      <Nav className="sidebarnamesparent flex-column flex-grow-1">
         <Nav.Link
           onClick={() => handleComponentClick("dashboard")}
-          className={`text-white my-2 py-2 px-3 d-flex align-items-center ${
+          className={`text-white sidebarname my-2 py-2 px-3 d-flex align-items-center ${
             activeComponent === "dashboard" ? "active-link" : ""
           }`}
         >
@@ -47,7 +49,7 @@ const Sidebar = ({ props, setSelectedComponent }) => {
         </Nav.Link>
         <Nav.Link
           onClick={() => handleComponentClick("users")}
-          className={`text-white my-2 py-2 px-3 d-flex align-items-center ${
+          className={`text-white sidebarname my-2 py-2 px-3 d-flex align-items-center ${
             activeComponent === "users" ? "active-link" : ""
           }`}
         >
@@ -55,7 +57,7 @@ const Sidebar = ({ props, setSelectedComponent }) => {
         </Nav.Link>
         <Nav.Link
           onClick={() => handleComponentClick("content")}
-          className={`text-white my-2 py-2 px-3 d-flex align-items-center ${
+          className={`text-white sidebarname my-2 py-2 px-3 d-flex align-items-center ${
             activeComponent === "content" ? "active-link" : ""
           }`}
         >
@@ -63,18 +65,27 @@ const Sidebar = ({ props, setSelectedComponent }) => {
         </Nav.Link>
         <Nav.Link
           href="#"
-          className={`text-white my-2 py-2 px-3 d-flex align-items-center`}
+          className={`text-white sidebarname my-2 py-2 px-3 d-flex align-items-center`}
           onClick={() => handleComponentClick("payments")}
         >
           <FaMoneyBillWave className="me-2" /> Payment Management
         </Nav.Link>
         <Nav.Link
           onClick={() => handleComponentClick("settings")}
-          className={`text-white my-2 py-2 px-3 d-flex align-items-center ${
+          className={`text-white sidebarname my-2 py-2 px-3 d-flex align-items-center ${
             activeComponent === "settings" ? "active-link" : ""
           }`}
         >
           <FaCogs className="me-2" /> Settings
+        </Nav.Link>
+
+
+          {/* Logout Button */}
+          <Nav.Link
+         href="/"
+          className={`text-white sidebarname my-2 py-2 px-3 d-flex align-items-center `}
+        >
+           <FaSignOutAlt className="me-2 " /> Logout
         </Nav.Link>
       </Nav>
 
@@ -89,13 +100,7 @@ const Sidebar = ({ props, setSelectedComponent }) => {
         </Button>
       </div>
 
-      {/* Logout Button */}
-      <Nav.Link
-        href="/"
-        className="text-white mt-auto d-flex align-items-center"
-      >
-        <FaSignOutAlt className="me-2" /> Logout
-      </Nav.Link>
+    
     </div>
   );
 };

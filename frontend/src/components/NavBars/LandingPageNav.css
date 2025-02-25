@@ -17,24 +17,21 @@ body {
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover effect on nav links */
-.navbar-nav .nav-link:hover {
-    color:  rgba(255, 193, 7, 1); /* Orange color on hover */
-    transform: scale(1.1); /* Slightly increase size on hover */
+/* .navbar-nav .nav-link:hover {
+    color:  rgba(255, 193, 7, 1);
+    transform: scale(1.1); 
 }
 
-/* Style for Login button */
 .navbar-nav .btn {
     transition: background-color 0.3s ease, transform 0.3s ease;
-    border-radius: 30px; /* Rounded button */
+    border-radius: 30px;
 }
 
-/* Hover effect on Login button */
 .navbar-nav .btn:hover {
-    background-color:  rgba(255, 193, 7, 1); /* Change background color on hover */
-    transform: scale(1.05); /* Slightly increase size on hover */
-    color: white; /* Change text color */
-}
+    background-color:  rgba(255, 193, 7, 1);
+    transform: scale(1.05);
+    color: white; 
+} */
 
 /* Active link style */
 .navbar-nav .nav-link.active {
@@ -44,8 +41,9 @@ body {
 
 /* Add separate background color to Company Name */
 .navbar-brand {
-    background-color: #23272b; /* You can change this color to your preference */
-    color: white; /* White text color */
+    /* background-color: #23272b; 
+    color: white;  */
+    color: #000;
     padding: 10px 15px; /* Add padding for better spacing */
     border-radius: 5px; /* Optional: rounded corners */
     transition: background-color 0.3s ease;
@@ -53,7 +51,6 @@ body {
 
 /* Hover effect for Company Name */
 .navbar-brand:hover {
-    background-color:  rgb(240, 181, 4); /* Darker blue on hover */
-    color: white; /* Ensure text remains white on hover */
+    color: rgb(0, 0, 0); /* Ensure text remains white on hover */
 }
 

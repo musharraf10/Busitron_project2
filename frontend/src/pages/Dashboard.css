@@ -1,0 +1,40 @@
+.cardsdata {
+  background: linear-gradient(
+    to left,
+    rgb(0, 125, 214) 50%,
+    transparent 50%
+  ) !important;
+  background-size: 200% 70% !important;
+  transition: all 0.5s ease-in-out !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px !important;
+  -webkit-transition: all 0.5s ease-in-out !important;
+  -moz-transition: all 0.5s ease-in-out !important;
+  -ms-transition: all 0.5s ease-in-out !important;
+  -o-transition: all 0.5s ease-in-out !important;
+  height: 140px !important;
+}
+
+.cardsdata:hover {
+  background-position: -100% 0 !important;
+  transform: scale(1.2);
+  color: white !important;
+  z-index: 999;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+
+.dropdownsubstat {
+  box-shadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px";
+  border-bottom: 0.2px solid rgb(215, 215, 215);
+}
+
+.dropdownsubstatlast{
+  border: none;
+}
+
+.navlinkoflogout:hover{
+  background-color: white !important;
+}

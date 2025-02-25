@@ -4,6 +4,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import "./AppNavbar.css";
 
 const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
   const [loginDuration, setLoginDuration] = useState("00:00:00");
@@ -32,11 +33,19 @@ const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
   const handleLogout = () => {
     sessionStorage.removeItem("loginTime");
     alert("Logged out successfully!");
-    window.location.reload(); 
+    window.location.reload();
   };
 
   return (
-    <Navbar bg="dark" variant="dark" className="px-3 position-sticky top-0" style={{zIndex:9}}>
+    <Navbar
+      bg="white"
+      variant="dark"
+      style={{
+        boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+        zIndex: 9,
+      }}
+      className=" position-sticky top-0 "
+    >
       <Button
         variant="outline-light"
         className="position-absolute"
@@ -45,7 +54,7 @@ const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
           top: "12px",
           left: isSidebarOpen ? "250px" : "20px",
           zIndex: 1050,
-          color: "white",
+          color: "black",
           border: "none",
           background: "transparent",
         }}
@@ -53,21 +62,32 @@ const AppNavbar = ({ props, isSidebarOpen, setIsSidebarOpen }) => {
         {isSidebarOpen ? <ArrowBackIosIcon size={20} /> : <FaBars size={20} />}
       </Button>
       <Navbar.Brand
-        className="fw-bold text-white"
+        className=""
         style={{
           marginLeft: "60px",
-          whiteSpace: "nowrap", 
+          whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
         }}
       >
-      {props.name}
+        {props.name}
       </Navbar.Brand>
       <Nav className="ms-auto d-flex align-items-center">
-        <span className="text-white me-3">⏳ Logged in: {loginDuration}</span>
-        <Nav.Link href="/">
-          <Button variant="danger" onClick={handleLogout}>
-            <FaSignOutAlt /> Logout
+        <span className="loggedintext text-black me-3">
+          ⏳ Logged in: {loginDuration}
+        </span>
+        <Nav.Link className="navlinkoflogout" href="/">
+          <Button
+            className="rounded-1 logoutbutton btn btn-outline-danger d-flex flex-row justify-content-center align-items-center"
+            onClick={handleLogout}
+            style={{
+              backgroundColor: "transparent",
+              borderColor: "red",
+              color: "red",
+            }}
+          >
+            <FaSignOutAlt className="mr-2" />
+            <p className="p-0 m-0">Logout</p>
           </Button>
         </Nav.Link>
       </Nav>
