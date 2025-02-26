@@ -11,7 +11,7 @@ import "./Sidebar.css"
 import "./Sidebar2.css"
 
 
-const Sidebar = ({ props, setSelectedComponent }) => {
+const AdminSidebar = ({ props, setSelectedComponent }) => {
   const [activeComponent, setActiveComponent] = useState("dashboard");
 
   const handleComponentClick = (component) => {
@@ -105,4 +105,4 @@ const Sidebar = ({ props, setSelectedComponent }) => {
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;

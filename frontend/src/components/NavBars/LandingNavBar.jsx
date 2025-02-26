@@ -6,7 +6,7 @@ import "./LandingPageNav.css";
 import AuthForm from "../Auth/AuthForm";
 
 const LandingNavbar = () => {
-    const [activeLink, setActiveLink] = useState("home");
+    const [activeLink, setActiveLink] = useState("");
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
@@ -25,10 +25,11 @@ const LandingNavbar = () => {
     return (
         <div>
             {/* Navbar Section */}
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <nav className="navbar navbar-expand-lg  bg-dark text-white fixed-top">
                 <div className="container-fluid">
                     <NavLink
-                        className="navbar-brand"
+                        style={{ color: "white" }}
+                        className="navbar-brand tetx-white"
                         to="/"
                         onClick={() => {
                             handleLinkClick("home");
@@ -51,12 +52,28 @@ const LandingNavbar = () => {
                     </button>
                     <div className="" id="navbarNav">
                         <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
+                            <li className="nav-item" >
                                 <NavLink
                                     className={`nav-link ${activeLink === "home" ? "active" : ""}`}
                                     to="/"
                                 >
                                     Home
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink
+                                    className={`nav-link ${activeLink === "about" ? "active" : ""}`}
+                                    to="/aboutus"
+                                >
+                                    AboutUs
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink
+                                    className={`nav-link ${activeLink === "contact" ? "active" : ""}`}
+                                    to="/contactus"
+                                >
+                                    Contact Us
                                 </NavLink>
                             </li>
 
@@ -66,7 +83,7 @@ const LandingNavbar = () => {
                                     onClick={handleLoginClick}
                                 >
                                     Login
-                                </button>
+                            </button>
                             </li>
                         </ul>
                     </div>

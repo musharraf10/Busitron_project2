@@ -3,11 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import ErrorBoundary from './components/ErrorBoundry';
 import AuthForm from './components/Auth/AuthForm';
-import Home from './pages/Home';
+import AdminHome from './pages/admin/AdminHome';
+import SubscriberHome from './pages/subscriber/SubscriberHome';
 import LandingHome from './components/LandingPage/LandingHome';
 import ForgotPassword from './components/Auth/ForgotPassword';
 // import PaymentManagementPage from './pages/PaymentManagementPage.jsx'
+import About from './components/Footer/About';
+import Contact from './components/Footer/Contact';
 import "./App.css"
+
 const App = () => {
 
 
@@ -28,10 +32,16 @@ const App = () => {
               </ErrorBoundary>
             }
           />
+            <Route path="/aboutus" element={<About />} />
+            <Route path="/contactus" element={<Contact />} />
+
           <Route path="/login" element={<AuthForm />} />
-          <Route path="/admin" element={<Home props={user} />} />
+          <Route path="/admin" element={<AdminHome props={user} />} />
+          <Route path="/subscriber" element={<SubscriberHome props={user} />} />
           {/* <PaymentManagementPage/> */}
           <Route path="/forget-password" element={<ForgotPassword />} /> 
+
+
         </Routes>
       </Router>
     </>

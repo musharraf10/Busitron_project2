@@ -11,8 +11,8 @@ import {
   FaVideo,
 } from "react-icons/fa";
 import { Line } from "react-chartjs-2";
-import MyChart from "../components/CanvasHandiler";
-import SubscriptionStats from "../components/SubscriptionStats";
+import MyChart from "../../components/CanvasHandiler";
+import SubscriptionStats from "../../components/SubscriptionStats";
 import "./Dashboard.css"
 const Dashboard = ({ props }) => {
   const [stats, setStats] = useState([]);

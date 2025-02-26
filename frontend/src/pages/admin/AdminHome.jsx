@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Sidebar from "../components/NavBars/Sidebar";
+import AdminSidebar from "../../components/NavBars/adminNavbar/AdminSidebar";
 import Dashboard from "./Dashboard";
-import UsersManagement from "./UsersManagement";
-import AppNavbar from "../components/NavBars/AppNavbar";
+import UsersManagement from "./Usersmanagement";
+import AppNavbar from "../../components/NavBars/AppNavbar";
 import ContentModeration from "./ContentModeration";
-import Settings from "../components/Settings";
-import SubscriptionCards from "../components/Subscriptions/SubscriptionCards";
+import Settings from "../../components/Settings";
+import SubscriptionCards from "../../components/Subscriptions/SubscriptionCards";
 import PaymentsDashboard from "./Payments/PaymentsDashboard";
 
-function Home({ props }) {
+function AdminHome({ props }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedComponent, setSelectedComponent] = useState("dashboard"); 
 
@@ -20,7 +20,7 @@ function Home({ props }) {
       />
       <div className="d-flex">
         {isSidebarOpen && (
-          <Sidebar props={props} setSelectedComponent={setSelectedComponent} />
+          <AdminSidebar props={props} setSelectedComponent={setSelectedComponent} />
         )}
 
         {/* Main Content - Conditionally Render Components */}
@@ -47,4 +47,4 @@ function Home({ props }) {
   );
 }
 
-export default Home;
+export default AdminHome;
